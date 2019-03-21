@@ -2,16 +2,16 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "testingPassword",
-  database: "bamazon"
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "testingPassword",
+    database: "bamazon"
 });
 
 connection.connect(function (err) {
-  if (err) throw err;
-  getCatalogue();
+    if (err) throw err;
+    getCatalogue();
 });
 
 function getCatalogue() {
@@ -24,7 +24,6 @@ function getCatalogue() {
         }
         allProds = res;
     });
-
 
     inquirer
     .prompt({
@@ -53,10 +52,10 @@ function getCatalogue() {
                     } else {
                         console.log(allProds[answer.product_to_buy - 1].product_name + " x" + ans.number_to_buy + " added to your cart.");
                         console.log("Your total price today is $" + (parseFloat((allProds[answer.product_to_buy - 1].price.replace("$",""))) * 2));
+                        // Take shit out of the database.
                     }
                 });
         }
     });
-
     connection.end();
 }
